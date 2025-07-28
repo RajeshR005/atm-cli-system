@@ -29,7 +29,7 @@ def add_account_users(check_admin):
     db.commit()
     db.refresh(new_user)
 
-    new_account=Accountinfo(user_id=new_user.id,Account_no=Account_no,atm_card_no=atm_card_no,avail_balance=avail_balance,pin_no=pin_no,created_by=created_by,modified_by=modified_by)
+    new_account=Accountinfo(user_id=new_user.id,Account_no=Account_no+str(new_user.id),atm_card_no=atm_card_no+str(new_user.id),avail_balance=avail_balance,pin_no=pin_no,created_by=created_by,modified_by=modified_by)
     
     db.add(new_account)
     db.commit()
