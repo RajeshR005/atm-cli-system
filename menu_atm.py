@@ -1,5 +1,6 @@
-from utility import check_auth
+from utility import *
 from functions.admin import *
+from functions.account_holder import *
 print(" Welcome to Prince Banking Services ")
 print("------------------------------------")
 def menus():
@@ -13,7 +14,7 @@ def menus():
         check_admin=check_auth(admin_id,pin)
         if isinstance(check_admin,str):
             print (check_admin)
-            exit()
+            continue_again()
         if not check_admin.role=="admin":
             print("You are not Authorized Here !")
         print("\nAdmin Login Successful")
@@ -33,6 +34,19 @@ def menus():
             change_user_account_in_active()
         elif admin_choice==3:
             change_user_account_active()
+        elif admin_choice==4:
+            check_avail_balance_atm()
+        elif admin_choice==5:
+            Add_cash(check_admin)
+
+    elif Enter_choice==2:
+        card_no=input("Enter your ATM card No: ")
+        get_account=db.query(Accountinfo).filter(Accountinfo.atm_card_no==card_no,Accountinfo.status==1).first()
+        if not get_account:
+            print("Invalid Request Contact Branch")
+        
+        account_holder_deposit(card_no)
+        
             
 
 

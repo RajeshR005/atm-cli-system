@@ -63,3 +63,45 @@ def continue_again():
 
 
     
+#----------------------------------------------------------------------------
+
+#Add cash in ATM
+
+def Add_cash(user):
+    deposit=db.query(Atm_machine).filter(Atm_machine.status==1).first()
+    fives=int(input("Enter No of ₹500 Notes: "))
+    hundreds=int(input("Enter No of ₹100 Notes: "))
+    user_deposit=fives*500+hundreds*100
+    deposit.Amount=deposit.Amount+user_deposit
+    deposit.no_of_fivehundred=deposit.no_of_fivehundred+fives
+    deposit.no_of_hundred=deposit.no_of_hundred+hundreds
+
+    print(f"Deposit Amount Summary\
+          \n₹500 Notes: {fives}\
+          \n₹100 Notes: {hundreds}\
+          \nTotal Deposit Amount: {user_deposit}")
+    confirmation=int(input("Confirm Deposit\
+                           \nYes = 1\
+                           \nNo = 2\
+                           \nEnter Your choice: "))
+    if confirmation==1:
+        if user.role=="admin":
+            print(f"Cash Deposited Successfully\
+                  \nDeposited Amount: {user_deposit}\
+                  \nTotal Amount in ATM: {deposit.Amount}")
+        else:
+            
+            account=db.query(Accountinfo).filter(Accountinfo.user_id==user.id,Accountinfo.status==1).first()
+            account.avail_balance=account.avail_balance+user_deposit
+            # history_record=
+            print(f"Available Balance: {account.avail_balance}")
+                
+
+
+
+       
+        # db.commit()
+
+
+
+# Add_cash()

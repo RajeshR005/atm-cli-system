@@ -59,8 +59,16 @@ def change_user_account_active():
     db.commit()
     print("Account Re-Activated Sucessfully")
 
+def check_avail_balance_atm():
+    check_balance=db.query(Atm_machine).filter(Atm_machine.status==1).first()
     
+
+    print(f"Balance in Atm ₹ {check_balance.Amount}\
+          \nNo of ₹500 Notes: {check_balance.no_of_fivehundred}\
+          \nNo of ₹100 Notes: {check_balance.no_of_hundred}")
+
     
+
 
     
 
