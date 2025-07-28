@@ -15,7 +15,7 @@ def verify_pin(pin,hash_pin):
 #--------------------------------------------------
 
 #verify User's
-
+ 
 def check_auth(card_no,pin):
     user=db.query(Accountinfo).filter(Accountinfo.atm_card_no==card_no).first()
     if not user:
